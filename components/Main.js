@@ -8,48 +8,116 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { MdBuild, MdCall } from "react-icons/md";
 import { Input } from "@chakra-ui/react";
 import { Radio, RadioGroup } from "@chakra-ui/react";
 export default function Main() {
   const [value, setValue] = useState("1");
-  const [value2, setValue2] = useState("1");
+  const [value2, setValue2] = useState("2");
   const [input, setInput] = useState("1");
-  const [results, setResults] = useState("0");
+  const [results, setResults] = useState("1");
 
-  const getIndex = (a, b) => {
+  // create a function to convert meters to kilometers
+  const convertMetersToKilometers = (e) => {
+    setResults(Number(e / 1000).toFixed(4));
+  };
+
+  // create a function to convert meters to centimeters
+  const convertMetersToCentimeters = (e) => {
+    setResults(Number(e * 100).toFixed(2));
+  };
+
+  // create a function to convert meters to millimeters
+  const convertMetersToMillimeters = (e) => {
+    setResults(Number(e * 1000).toFixed(2));
+  };
+  // create a function to convert meters to micrometers
+  const convertMetersToMicrometers = (e) => {
+    setResults(Number(e * 1000000).toFixed(2));
+  };
+
+  // create a function to convert meters to nanometers
+  const convertMetersToNanometers = (e) => {
+    setResults(Number(e * 1000000000).toFixed(2));
+  };
+  // create a function to convert meters to miles
+
+  const convertMetersToMiles = (e) => {
+    setResults(Number(e / 1609.344).toFixed(6));
+  };
+  // create a function to convert meters to yards
+  const convertMetersToYards = (e) => {
+    setResults(Number(e / 0.9144).toFixed(6));
+  };
+  // create a function to convert meters to foots
+  const convertMetersToFeet = (e) => {
+    setResults(Number(e / 0.3048).toFixed(6));
+  };
+
+  // create a function to convert meters to inches
+  const convertMetersToInches = (e) => {
+    setResults(Number(e / 0.0254).toFixed(6));
+  };
+
+  const getIndex = (a, b, e) => {
+    e = Number(e) || 0;
     switch (a) {
       case "1":
-        if (b == 2) setResults("meter to kilometer");
-        if (b == 3) setResults(" 1 - 3");
-        if (b == 4) setResults(" 1 - 4");
-        if (b == 5) setResults(" 1 - 5");
-        if (b == 6) setResults(" 1 - 6");
-        if (b == 7) setResults(" 1 - 7");
-        if (b == 8) setResults(" 1 - 8");
-        if (b == 9) setResults(" 1 - 9");
-        if (b == 10) setResults(" 1 - 10");
-        if (b == 11) setResults(" 1 - 11");
-        break;
+        switch (b) {
+          case "2":
+            convertMetersToKilometers(e);
 
+            break;
+          case "3":
+            convertMetersToCentimeters(e);
+            break;
+          case "4":
+            convertMetersToMillimeters(e);
+            break;
+          case "5":
+            convertMetersToMicrometers(e);
+            break;
+          case "6":
+            convertMetersToNanometers(e);
+            break;
+          case "7":
+            convertMetersToMiles(e);
+            break;
+          case "8":
+            convertMetersToYards(e);
+            break;
+          case "9":
+            convertMetersToFeet(e);
+            break;
+          case "10":
+            convertMetersToInches(e);
+
+            break;
+
+          default:
+            setResults("Unknown");
+            break;
+        }
+        break;
       default:
+        setResults("Unknown Main");
         break;
     }
   };
   const handleChange = (e) => {
     setValue(e);
-    getIndex(e, value2);
+    getIndex(e, value2, input);
   };
   const handleChange2 = (e) => {
     setValue2(e);
-    getIndex(value, e);
+    getIndex(value, e, input);
   };
 
   const handleInputChange = (e) => {
-    getIndex(value, value2);
-    setInput(Number(e.target.value));
+    setInput(e.target.value);
+    getIndex(value, value2, e.target.value);
   };
 
   return (
@@ -130,14 +198,12 @@ export default function Main() {
                 <Radio id="Length10" value="10">
                   Inch
                 </Radio>
-                <Radio id="Length11" value="11">
-                  Light Year
-                </Radio>
               </Stack>{" "}
             </RadioGroup>
           </WrapItem>
 
           <Input
+            type="number"
             name="input"
             value={input}
             placeholder="Convert"
@@ -155,11 +221,12 @@ export default function Main() {
                 spacing={[1, 2, 4, 5]}
                 divider={<StackDivider borderColor="gray.200" />}
               >
-                {value != 1 && (
+                {value !== "1" && (
                   <Radio id="Length12" value="1">
                     Meter
                   </Radio>
                 )}
+
                 <Radio id="Length13" value="2">
                   Kilometer
                 </Radio>
@@ -186,9 +253,6 @@ export default function Main() {
                 </Radio>
                 <Radio id="Length21" value="10">
                   Inch
-                </Radio>
-                <Radio id="Length22" value="11">
-                  Light Year
                 </Radio>
               </Stack>{" "}
             </RadioGroup>
