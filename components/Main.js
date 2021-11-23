@@ -119,7 +119,62 @@ export default function Main() {
     setInput(e.target.value);
     getIndex(value, value2, e.target.value);
   };
+  const GetData = () => {
+    
+    const data = [
+      {
+        name: Meter,
+         id:"Meter",
+         value="Meter",
 
+
+
+        name: Kilometer,
+        id:'Kilometer',
+        value:'Kilometer',
+
+        name: Centimeter,
+        id:'Centimeter',
+        value:'Centimeter',
+
+        name: Millimeter,
+        id:'Millimeter',
+        value:'Millimeter',
+
+        name: Micrometer,
+        id:'Millimeter',
+        value:'Millimeter',
+
+        name: Nanometer,
+        id:'Nanometer',
+        value:'Nanometer',
+
+
+        name: Mile,
+        id:'Mile',
+        value:'Mile',
+
+        name: Yard,
+        id:'Yard',
+        value:'Yard',
+
+        name: Foot,
+        id:'Foot',
+        value:'Foot',
+
+        name: Inch,
+        id:'Inch',
+        value:'Inch'
+      },
+    ];
+    return (<>
+          {
+              data.map(d=>      <Radio key={d.id}  id={d.id} value={d.value}>
+                  {d.name}
+                </Radio>)
+
+          }
+    </>)};
   return (
     <>
       <Wrap justify="center" mt="10%">
@@ -168,36 +223,7 @@ export default function Main() {
                 spacing={[1, 2, 4, 5]}
                 divider={<StackDivider borderColor="gray.200" />}
               >
-                <Radio id="Length1" value="1">
-                  Meter
-                </Radio>
-                <Radio id="Length2" value="2">
-                  Kilometer
-                </Radio>
-                <Radio id="Length3" value="3">
-                  Centimeter
-                </Radio>
-                <Radio id="Length4" value="4">
-                  Millimeter
-                </Radio>
-                <Radio id="Length5" value="5">
-                  Micrometer
-                </Radio>
-                <Radio id="Length6" value="6">
-                  Nanometer
-                </Radio>
-                <Radio id="Length7" value="7">
-                  Mile
-                </Radio>
-                <Radio id="Length8" value="8">
-                  Yard
-                </Radio>
-                <Radio id="Length9" value="9">
-                  Foot
-                </Radio>
-                <Radio id="Length10" value="10">
-                  Inch
-                </Radio>
+              <GetData/>
               </Stack>{" "}
             </RadioGroup>
           </WrapItem>
@@ -227,33 +253,7 @@ export default function Main() {
                   </Radio>
                 )}
 
-                <Radio id="Length13" value="2">
-                  Kilometer
-                </Radio>
-                <Radio id="Length14" value="3">
-                  Centimeter
-                </Radio>
-                <Radio id="Length15" value="4">
-                  Millimeter
-                </Radio>
-                <Radio id="Length16" value="5">
-                  Micrometer
-                </Radio>
-                <Radio id="Length17" value="6">
-                  Nanometer
-                </Radio>
-                <Radio id="Length18" value="7">
-                  Mile
-                </Radio>
-                <Radio id="Length19" value="8">
-                  Yard
-                </Radio>
-                <Radio id="Length20" value="9">
-                  Foot
-                </Radio>
-                <Radio id="Length21" value="10">
-                  Inch
-                </Radio>
+               <GetData/>
               </Stack>{" "}
             </RadioGroup>
           </WrapItem>
