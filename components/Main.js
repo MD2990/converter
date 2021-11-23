@@ -1,108 +1,28 @@
-import {
-  Center,
-  HStack,
-  Stack,
-  StackDivider,
-  Text,
-  VStack,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/layout";
-import React, { useCallback, useEffect, useState } from "react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Stack, StackDivider, VStack, Wrap, WrapItem } from "@chakra-ui/layout";
+import React, { useState } from "react";
+import { Button } from "@chakra-ui/react";
 import { MdBuild, MdCall } from "react-icons/md";
 import { Input } from "@chakra-ui/react";
 import { Radio, RadioGroup } from "@chakra-ui/react";
+
 export default function Main() {
-  const [value, setValue] = useState("1");
-  const [value2, setValue2] = useState("2");
+  const [value, setValue] = useState("Meter");
+  const [value2, setValue2] = useState("Meter");
   const [input, setInput] = useState("1");
   const [results, setResults] = useState("1");
-
-  // create a function to convert meters to kilometers
-  const convertMetersToKilometers = (e) => {
-    setResults(Number(e / 1000).toFixed(4));
-  };
-
-  // create a function to convert meters to centimeters
-  const convertMetersToCentimeters = (e) => {
-    setResults(Number(e * 100).toFixed(2));
-  };
-
-  // create a function to convert meters to millimeters
-  const convertMetersToMillimeters = (e) => {
-    setResults(Number(e * 1000).toFixed(2));
-  };
-  // create a function to convert meters to micrometers
-  const convertMetersToMicrometers = (e) => {
-    setResults(Number(e * 1000000).toFixed(2));
-  };
-
-  // create a function to convert meters to nanometers
-  const convertMetersToNanometers = (e) => {
-    setResults(Number(e * 1000000000).toFixed(2));
-  };
-  // create a function to convert meters to miles
-
-  const convertMetersToMiles = (e) => {
-    setResults(Number(e / 1609.344).toFixed(6));
-  };
-  // create a function to convert meters to yards
-  const convertMetersToYards = (e) => {
-    setResults(Number(e / 0.9144).toFixed(6));
-  };
-  // create a function to convert meters to foots
-  const convertMetersToFeet = (e) => {
-    setResults(Number(e / 0.3048).toFixed(6));
-  };
-
-  // create a function to convert meters to inches
-  const convertMetersToInches = (e) => {
-    setResults(Number(e / 0.0254).toFixed(6));
-  };
 
   const getIndex = (a, b, e) => {
     e = Number(e) || 0;
     switch (a) {
-      case "1":
-        switch (b) {
-          case "2":
-            convertMetersToKilometers(e);
-
-            break;
-          case "3":
-            convertMetersToCentimeters(e);
-            break;
-          case "4":
-            convertMetersToMillimeters(e);
-            break;
-          case "5":
-            convertMetersToMicrometers(e);
-            break;
-          case "6":
-            convertMetersToNanometers(e);
-            break;
-          case "7":
-            convertMetersToMiles(e);
-            break;
-          case "8":
-            convertMetersToYards(e);
-            break;
-          case "9":
-            convertMetersToFeet(e);
-            break;
-          case "10":
-            convertMetersToInches(e);
-
-            break;
-
-          default:
-            setResults("Unknown");
-            break;
-        }
+      case "Meter":
+        fromMeter(b, e);
         break;
+      case "Kilometer":
+        fromKilometer(b, e);
+        break;
+
       default:
-        setResults("Unknown Main");
+        setResults(0);
         break;
     }
   };
@@ -120,61 +40,73 @@ export default function Main() {
     getIndex(value, value2, e.target.value);
   };
   const GetData = () => {
-    
     const data = [
       {
-        name: Meter,
-         id:"Meter",
-         value="Meter",
-
-
-
-        name: Kilometer,
-        id:'Kilometer',
-        value:'Kilometer',
-
-        name: Centimeter,
-        id:'Centimeter',
-        value:'Centimeter',
-
-        name: Millimeter,
-        id:'Millimeter',
-        value:'Millimeter',
-
-        name: Micrometer,
-        id:'Millimeter',
-        value:'Millimeter',
-
-        name: Nanometer,
-        id:'Nanometer',
-        value:'Nanometer',
-
-
-        name: Mile,
-        id:'Mile',
-        value:'Mile',
-
-        name: Yard,
-        id:'Yard',
-        value:'Yard',
-
-        name: Foot,
-        id:'Foot',
-        value:'Foot',
-
-        name: Inch,
-        id:'Inch',
-        value:'Inch'
+        name: "Meter",
+        id: "1",
+        value: "Meter",
+      },
+      {
+        name: "Kilometer",
+        id: "2",
+        value: "Kilometer",
+      },
+      {
+        name: "Centimeter",
+        id: "3",
+        value: "Centimeter",
+      },
+      {
+        name: "Millimeter",
+        id: "4",
+        value: "Millimeter",
+      },
+      {
+        name: "Micrometer",
+        id: "5",
+        value: "Micrometer",
+      },
+      {
+        name: "Nanometer",
+        id: "6",
+        value: "Nanometer",
+      },
+      {
+        name: "Mile",
+        id: "7",
+        value: "Mile",
+      },
+      {
+        name: "Yard",
+        id: "8",
+        value: "Yard",
+      },
+      {
+        name: "Feet",
+        id: "9",
+        value: "Feet",
+      },
+      {
+        name: "Inch",
+        id: "10",
+        value: "Inch",
       },
     ];
-    return (<>
-          {
-              data.map(d=>      <Radio key={d.id}  id={d.id} value={d.value}>
-                  {d.name}
-                </Radio>)
 
-          }
-    </>)};
+    return (
+      <Stack
+        direction={["column", "row"]}
+        spacing={[1, 2, 4, 5]}
+        divider={<StackDivider borderColor="gray.200" />}
+      >
+        {data.map((d) => (
+          <Radio key={d.id} value={d.value}>
+            {d.name}
+          </Radio>
+        ))}
+      </Stack>
+    );
+  };
   return (
     <>
       <Wrap justify="center" mt="10%">
@@ -213,18 +145,13 @@ export default function Main() {
         <Wrap align="flex-start" justify="flex-start" spacing={[1, 2, 4, 8]}>
           <WrapItem>
             <RadioGroup
+              id="radio-group-1"
               size="sm"
               name="radio"
               value={value}
               onChange={handleChange}
             >
-              <Stack
-                direction={["column", "row"]}
-                spacing={[1, 2, 4, 5]}
-                divider={<StackDivider borderColor="gray.200" />}
-              >
-              <GetData/>
-              </Stack>{" "}
+              <GetData />
             </RadioGroup>
           </WrapItem>
 
@@ -237,6 +164,7 @@ export default function Main() {
           />
           <WrapItem>
             <RadioGroup
+              id="radio-group-2"
               size="sm"
               name="radio"
               value={value2}
@@ -247,13 +175,7 @@ export default function Main() {
                 spacing={[1, 2, 4, 5]}
                 divider={<StackDivider borderColor="gray.200" />}
               >
-                {value !== "1" && (
-                  <Radio id="Length12" value="1">
-                    Meter
-                  </Radio>
-                )}
-
-               <GetData/>
+                <GetData />
               </Stack>{" "}
             </RadioGroup>
           </WrapItem>
@@ -263,4 +185,163 @@ export default function Main() {
       </VStack>
     </>
   );
+
+  function fromMeter(b, e) {
+    // create a function to convert meters to kilometers
+    const convertMetersToKilometers = () => {
+      setResults(Number(e / 1000).toFixed(4));
+    };
+
+    // create a function to convert meters to centimeters
+    const convertMetersToCentimeters = () => {
+      setResults(Number(e * 100).toFixed(2));
+    };
+
+    // create a function to convert meters to millimeters
+    const convertMetersToMillimeters = () => {
+      setResults(Number(e * 1000).toFixed(2));
+    };
+    // create a function to convert meters to micrometers
+    const convertMetersToMicrometers = () => {
+      setResults(Number(e * 1000000).toFixed(2));
+    };
+
+    // create a function to convert meters to nanometers
+    const convertMetersToNanometers = () => {
+      setResults(Number(e * 1000000000).toFixed(2));
+    };
+    // create a function to convert meters to miles
+
+    const convertMetersToMiles = () => {
+      setResults(Number(e / 1609.344).toFixed(6));
+    };
+    // create a function to convert meters to yards
+    const convertMetersToYards = () => {
+      setResults(Number(e / 0.9144).toFixed(6));
+    };
+    // create a function to convert meters to Feet
+    const convertMetersToFeet = () => {
+      setResults(Number(e / 0.3048).toFixed(6));
+    };
+
+    // create a function to convert meters to inches
+    const convertMetersToInches = () => {
+      setResults(Number(e / 0.0254).toFixed(6));
+    };
+
+    switch (b) {
+      case "Meter":
+        setResults("Convert To ...");
+        break;
+      case "Kilometer":
+        convertMetersToKilometers(e);
+
+        break;
+      case "Centimeter":
+        convertMetersToCentimeters(e);
+        break;
+      case "Millimeter":
+        convertMetersToMillimeters(e);
+        break;
+      case "Micrometer":
+        convertMetersToMicrometers(e);
+        break;
+      case "Nanometer":
+        convertMetersToNanometers(e);
+        break;
+      case "Mile":
+        convertMetersToMiles(e);
+        break;
+      case "Yard":
+        convertMetersToYards(e);
+        break;
+      case "Feet":
+        convertMetersToFeet(e);
+        break;
+      case "Inch":
+        convertMetersToInches(e);
+
+        break;
+
+      default:
+        setResults(0);
+        break;
+    }
+  }
+  function fromKilometer(b, e) {
+    // create a function to convert kilometers to meters
+    const convertKilometersToMeters = () => {
+      setResults(Number(e * 1000).toFixed(2));
+    };
+    // create a function to convert kilometers to centimeters
+    const convertKilometersToCentimeters = () => {
+      setResults(Number(e * 100000).toFixed(2));
+    };
+    // create a function to convert kilometers to millimeters
+    const convertKilometersToMillimeters = () => {
+      setResults(Number(e * 1000000).toFixed(2));
+    };
+    // create a function to convert kilometers to micrometers
+    const convertKilometersToMicrometers = () => {
+      setResults(Number(e * 1000000000).toFixed(2));
+    };
+    // create a function to convert kilometers to nanometers
+    const convertKilometersToNanometers = () => {
+      setResults(Number(e * 1000000000000).toFixed(2));
+    };
+    // create a function to convert kilometers to miles
+    const convertKilometersToMiles = () => {
+      setResults(Number(e / 1.60934).toFixed(6));
+    };
+    // create a function to convert kilometers to yards
+    const convertKilometersToYards = () => {
+      setResults(Number(e / 0.0009144).toFixed(4));
+    };
+    // create a function to convert kilometers to Feet
+    const convertKilometersToFeet = () => {
+      setResults(Number(e / 0.0003048).toFixed(3));
+    };
+    // create a function to convert kilometers to inches
+    const convertKilometersToInches = () => {
+      setResults(Number(e * 39370).toFixed(3));
+    };
+
+    // create a function to convert kilometers to inches
+
+    switch (b) {
+      case "Kilometer":
+        setResults("Convert To ...");
+        break;
+      case "Meter":
+        convertKilometersToMeters(e);
+        break;
+      case "Centimeter":
+        convertKilometersToCentimeters(e);
+        break;
+      case "Millimeter":
+        convertKilometersToMillimeters(e);
+        break;
+      case "Micrometer":
+        convertKilometersToMicrometers(e);
+        break;
+      case "Nanometer":
+        convertKilometersToNanometers(e);
+        break;
+      case "Mile":
+        convertKilometersToMiles(e);
+        break;
+      case "Yard":
+        convertKilometersToYards(e);
+        break;
+      case "Feet":
+        convertKilometersToFeet(e);
+        break;
+      case "Inch":
+        convertKilometersToInches(e);
+        break;
+      default:
+        setResults(0);
+        break;
+    }
+  }
 }
