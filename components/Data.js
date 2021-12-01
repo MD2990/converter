@@ -59,8 +59,8 @@ export default function Data() {
   return (
     <Wrap justify="flex-start" align="flex-start" spacing="8">
       {data.map((d) => (
-        <WrapItem key={d.id}>
-          <Radio colorScheme="gray" value={d.value}>
+        <WrapItem  key={d.id}>
+          <Radio   colorScheme="gray" value={d.value}>
             {d.name}
           </Radio>
         </WrapItem>

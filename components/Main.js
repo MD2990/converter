@@ -1,23 +1,9 @@
-import { Center, Divider, Text, Wrap, WrapItem } from "@chakra-ui/layout";
+import { Center, Text, Wrap, WrapItem } from "@chakra-ui/layout";
 import React from "react";
-import { useSnapshot } from "valtio";
-import state from "./store";
 import MyRadioGroup from "./MyRadioGroup";
-import Inputs, { getIndex, Result } from "./Inputs";
 
 export default function Main() {
-  const snap = useSnapshot(state);
 
-  const handleChangeUp = (e) => {
-    state.up = e;
-
-    getIndex(e, snap.down, snap.input);
-  };
-  const handleChangeDown = (e) => {
-    state.down = e;
-
-    getIndex(snap.up, e, snap.input);
-  };
 
   return (
     <Center m="4" p="4">
@@ -32,7 +18,7 @@ export default function Main() {
         justifyContent="center"
         alignSelf="center"
       >
-        <WrapItem>
+        <WrapItem  >
           <Text
             userSelect="none"
             textShadow="0px 0px 10px lightblue"
@@ -56,16 +42,8 @@ export default function Main() {
             </Text>
           </Text>
         </WrapItem>
-        <Divider pt="4%" />
-        <MyRadioGroup value={snap.up} onChange={handleChangeUp} />
-        <Divider />
-        <Inputs />
-        <Divider />
 
-        <MyRadioGroup value={snap.down} onChange={handleChangeDown} />
-
-        <Divider />
-        <Result />
+        <MyRadioGroup />
       </Wrap>
     </Center>
   );
