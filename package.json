@@ -20,7 +20,7 @@
     "valtio": "^1.2.6"
   },
   "devDependencies": {
-    "eslint": "^8.3.0",
+    "eslint": "<8.0.0",
     "eslint-config-next": "^12.0.4",
     "yarn-upgrade-all": "^0.5.4"
   }
