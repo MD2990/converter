@@ -6,7 +6,7 @@ import Data from "./Data";
 import Inputs, { getIndex, Result } from "./Inputs";
 import state from "./store";
 
-export default function MyRadioGroup({ children }) {
+export default function MyRadioGroup() {
   const snap = useSnapshot(state);
 
   const handleChangeUp = (e) => {
@@ -22,9 +22,9 @@ export default function MyRadioGroup({ children }) {
 
 
   const MyRadioGroups = ({ value, onChange }) => (
-    <WrapItem textShadow="0 0 0.2rem #67afd0" bg='gray.50' rounded='xl'   p="4">
+    <WrapItem    bg='gray.50' rounded='xl'   p="4">
       <RadioGroup
-        color="gray.600"
+        color="blue.600"
         fontWeight="bold"
         size="md"
         value={value}
